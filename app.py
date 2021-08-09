@@ -1,4 +1,5 @@
 from flask import Flask, request
+from json import dumps
 import logging
 
 logging.basicConfig(filename='flask-app.log', level=logging.DEBUG,
@@ -11,8 +12,8 @@ app = Flask(__name__)
 def profile():
     try:
         logging.info("Request URL: " + request.url +
-                     "Request headers: " + str(list(request.headers)) +
-                     "Request body" + str(list(request.body)))
+                     "\nRequest headers: " + str(list(request.headers)) +
+                     "\nRequest body: " + dumps(request.get_json()))
     except Exception as er:
         logging.exception(str(er))
     if request.method == 'POST':
