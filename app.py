@@ -8,17 +8,16 @@ logging.basicConfig(filename='flask-app.log', level=logging.DEBUG,
 app = Flask(__name__)
 
 
-@app.route("/", methods=['GET', 'POST'])
-def profile():
+@app.route("/<path:path>", methods=['GET', 'POST'])
+def profile(path):
     try:
-        logging.info("Request URL: " + request.url +
+        logging.info("Request URL: " + request.url +  # request.path +
+                     "\nRequest path: " + path +
+                     "\nRequest params: " + str(request.query_string) +
                      "\nRequest headers: " + str(list(request.headers)) +
                      "\nRequest body: " + dumps(request.get_json()))
     except Exception as er:
         logging.exception(str(er))
     if request.method == 'POST':
-        return {
-            "username": "Семён",
-            "theme": "Luna"
-        }
+        pass
     return "<p>Hello, World!</p>"
