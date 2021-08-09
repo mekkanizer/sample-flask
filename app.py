@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request
 import logging
 
 logging.basicConfig(filename='flask-app.log', level=logging.DEBUG)
@@ -6,11 +6,11 @@ logging.basicConfig(filename='flask-app.log', level=logging.DEBUG)
 app = Flask(__name__)
 
 
-@app.route("/profile")
+@app.route("/")
 def profile():
-    logging.info("Request URL: " + request.url +
-                 "Request headers: " + request.headers +
-                 "Request body" + request.body)
+    # logging.info("Request URL: " + request.url +
+    #              "Request headers: " + request.headers +
+    #              "Request body" + request.body)
     if request.method == 'POST':
         return {
             "username": "Семён",
